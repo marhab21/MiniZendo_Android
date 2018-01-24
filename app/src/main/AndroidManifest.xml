@@ -25,7 +25,7 @@
         <activity android:name=".AddSessionActivity" />
         <activity android:name=".SessionActivity" />
 
-        <receiver android:name=".TimePicker">
+       <!-- <receiver android:name=".TimePicker">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -33,7 +33,7 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/number_picker_info" />
-        </receiver>
+        </receiver> -->
     </application>
 
 </manifest>
