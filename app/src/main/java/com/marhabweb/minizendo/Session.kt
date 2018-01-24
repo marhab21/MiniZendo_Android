@@ -84,7 +84,7 @@ open class Session() : RealmObject() {
         return const.msgGeneric[index]
     }
 
-    fun rand (from: Int, to: Int) : Int {
+    private fun rand (from: Int, to: Int) : Int {
         val random = Random()
         return random.nextInt(to - from) + from
     }

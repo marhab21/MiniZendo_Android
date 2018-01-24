@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import io.realm.Realm
@@ -28,6 +29,10 @@ class SessionActivity : AppCompatActivity() {
 
         title = "Session"
 
+        val zenGate = findViewById<View>(R.id.zenImage)
+        val image = zenGate.background
+        image.alpha = 120
+
         val sessionItemId = intent.getStringExtra("sessionItem")
         val realm = Realm.getDefaultInstance()
         val sessionItem = realm.where(Session::class.java).equalTo("id", sessionItemId).findFirst()
@@ -43,8 +48,6 @@ class SessionActivity : AppCompatActivity() {
             println("This session lasts $milliTime")
             timeInMillis = milliTime
 
-        val mPlayer = MediaPlayer.create(applicationContext, R.raw.bell)
-        mPlayer.start()
 
         if (sessionItem != null) {
             start(sessionItem)
@@ -57,6 +60,9 @@ class SessionActivity : AppCompatActivity() {
 
         progressBar.max = timeInMillis.toInt() / 1000
         isRunning = true
+
+        mPlayer = MediaPlayer.create(applicationContext, R.raw.bell)
+        mPlayer.start()
 
         countDownTimer = object : CountDownTimer(timeInMillis, 1) {
 
@@ -91,7 +97,7 @@ class SessionActivity : AppCompatActivity() {
         shortTimer = object : CountDownTimer(10000, 1) {
 
             override fun onTick(millisUntilFinished: Long) {
-                      println("TICK")
+                     // do nothing
             }
 
             override fun onFinish() {
@@ -106,6 +112,7 @@ class SessionActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         stop()
+        mPlayer.release()
         finish()
     }
 

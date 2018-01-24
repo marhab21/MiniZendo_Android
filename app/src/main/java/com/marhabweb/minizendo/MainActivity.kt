@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.ListView
 import android.widget.TextView
@@ -121,45 +119,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
         startActivity(intent)
-    }
-
-    //General code here
- /*   private fun showAlertWithThreeButton() {
-        val alertDilog = AlertDialog.Builder(this@MainActivity).create()
-        alertDilog.setTitle("Alert")
-        alertDilog.setMessage("Show Alert with three Button")
-
-        alertDilog.setButton(AlertDialog.BUTTON_POSITIVE, "POSITIVE", {
-            dialogInterface, i ->
-            Toast.makeText(applicationContext, "You clicked on POSITIVE Button", Toast.LENGTH_SHORT).show()
-        })
-
-        alertDilog.setButton(AlertDialog.BUTTON_NEGATIVE, "NEGATIVE", {
-            dialogInterface, j ->
-            Toast.makeText(applicationContext, "You clicked on NEGATIVE Button", Toast.LENGTH_SHORT).show()
-        })
-        alertDilog.setButton(AlertDialog.BUTTON_NEUTRAL, "NEUTRAL", {
-            dialogInterface, k ->
-            Toast.makeText(applicationContext, "You clicked on NEUTRAL Button", Toast.LENGTH_SHORT).show()
-        })
-
-        alertDilog.show()
-    }*/
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }
 
