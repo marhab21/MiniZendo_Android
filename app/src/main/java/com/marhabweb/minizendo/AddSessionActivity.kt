@@ -27,13 +27,11 @@ class AddSessionActivity : AppCompatActivity() {
         val saveButton = findViewById<Button>(R.id.saveButton)
 
         saveButton.setOnClickListener {
-            println("Hour Value = " + hourValue)
-            println("Minute Value = " + minsValue)
 
             val session = Session(hourValue, minsValue)
 
             val realm = Realm.getDefaultInstance()
-            val result = realm.where(Session::class.java).equalTo("durationInSeconds", session?.durationInSeconds).findFirst()
+            val result = realm.where(Session::class.java).equalTo("durationInSeconds", session.durationInSeconds).findFirst()
             if (result != null) {
                  showSimpleAlert()
                  // Leave without adding anything
@@ -44,7 +42,7 @@ class AddSessionActivity : AppCompatActivity() {
                 realm.commitTransaction()
                 finish()
             }
-            // Get the time
+
         }
 
 

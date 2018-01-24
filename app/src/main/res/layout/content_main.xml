@@ -15,5 +15,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </ListView>
+
+    <TextView android:id="@+id/noListText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="Press + button below to add session (6 maximum)"
+        android:textSize="34sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+
 </android.support.constraint.ConstraintLayout>

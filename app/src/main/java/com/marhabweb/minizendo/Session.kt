@@ -12,7 +12,7 @@ import java.util.*
  */
 
 open class Session() : RealmObject() {
-    
+
     @PrimaryKey
     private var id = UUID.randomUUID().toString()
     var title = "Meditation"
@@ -51,7 +51,7 @@ open class Session() : RealmObject() {
 
         var hrText = "hour"
         var minText = "minutes"
-        var totalText = "Life is short...";
+        var totalText: String
 
         val minutes = displayDuration
         val hours = minutes / 60
