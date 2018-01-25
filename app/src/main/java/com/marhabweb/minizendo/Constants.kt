@@ -5,7 +5,7 @@ package com.marhabweb.minizendo
  * Messages from Suzuki Roshi and others
  */
 class Constants {
-     public val msgGeneric = arrayListOf(
+     val msgGeneric = arrayListOf(
     "Treat every moment as your last. It is not preparation for something else",
     "In the beginner's mind there are many possibilities, but in the expert's mind there are few",
     "Nothing we see or hear is perfect. But right there in the imperfection is perfect reality",
@@ -26,6 +26,6 @@ class Constants {
     "The most important point is to accept yourself and stand on your two feet",
     "The true purpose of Zen is to see things as they are, to observe things as they are, and to let everything go as it goes",
     "You should rather be grateful for the weeds you have in your mind, because eventually they will enrich your practice",
-             "Just this moment is all we have..."
+     "Just this moment is all we have..."
     )
 }

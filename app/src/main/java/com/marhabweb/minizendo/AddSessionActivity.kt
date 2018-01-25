@@ -24,6 +24,8 @@ class AddSessionActivity : AppCompatActivity() {
         npHours.value = 0
         npMinutes.value = 10
 
+        title=getString(R.string.app_name)
+
         val saveButton = findViewById<Button>(R.id.saveButton)
 
         saveButton.setOnClickListener {
@@ -49,9 +51,9 @@ class AddSessionActivity : AppCompatActivity() {
     }
 
     fun showSimpleAlert() {
-        alert("You already have a session in the list with this duration","Duplicate Session") {
-            positiveButton("OK") {
-                toast("No change...")
+        alert(getString(R.string.already_session), getString(R.string.duplicate)) {
+            positiveButton(getString(R.string.ok)) {
+                toast(getString(R.string.no_change))
             }
         }.show()
     }
@@ -68,7 +70,7 @@ class AddSessionActivity : AppCompatActivity() {
         //Gets whether the selector wheel wraps when reaching the min/max value.
         numpick.setWrapSelectorWheel(wrap)
 
-        numpick.setOnValueChangedListener  { picker, oldVal, newVal ->
+        numpick.setOnValueChangedListener  { _, _, newVal ->
             if (max > 23) { // We are dealing with minutes
                 minsValue = numpick.value
             } else {

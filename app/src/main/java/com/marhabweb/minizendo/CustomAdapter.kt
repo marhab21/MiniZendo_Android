@@ -11,9 +11,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import io.realm.RealmResults
-//import kotlinx.android.synthetic.main.activity_main.*
-//import org.jetbrains.anko.alert
-//import org.jetbrains.anko.toast
 
 
 
@@ -74,7 +71,6 @@ class CustomAdapter(private var activity: Activity, private var items: RealmResu
         }
 
         viewHolder.deleteBtn?.setOnClickListener {
-            println("DELETE ME!")
 
             deleteSession(
                     activity,
@@ -96,6 +92,7 @@ class CustomAdapter(private var activity: Activity, private var items: RealmResu
 
         val finishIntent = Intent(activity.applicationContext, SessionActivity::class.java)
         finishIntent.putExtra("sessionItem", session.getId())
+        finishIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         activity.applicationContext.startActivity(finishIntent)
     }
 

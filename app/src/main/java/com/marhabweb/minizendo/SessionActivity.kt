@@ -27,7 +27,7 @@ class SessionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_session)
 
-        title = "Session"
+        title = getString(R.string.session)
 
         val zenGate = findViewById<View>(R.id.zenImage)
         val image = zenGate.background
@@ -45,13 +45,12 @@ class SessionActivity : AppCompatActivity() {
             val duration = sessionItem?.durationInSeconds
             val time = (if (duration != null) duration else throw NullPointerException("Expression 'duration' must not be null")).toLong()
             val milliTime = time * 1000
-            println("This session lasts $milliTime")
             timeInMillis = milliTime
 
 
-        if (sessionItem != null) {
+      //  if (sessionItem != null) {
             start(sessionItem)
-        }
+      //  }
 
     }
 
@@ -74,7 +73,7 @@ class SessionActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                textViewCount.text = "00:00"
+                textViewCount.text = getString(R.string.zero_time)
                 isRunning = false
                 progressBar.progress = timeInMillis.toInt() / 1000
                 progressBar.max = timeInMillis.toInt() / 1000
@@ -127,6 +126,7 @@ class SessionActivity : AppCompatActivity() {
             secondsString = "0" + secondsString
         }
 
-        textViewCount.setText(minutes.toString() + ":" + secondsString)
+        //textViewCount.setText(minutes.toString() + ":" + secondsString)
+        textViewCount.setText(getString(R.string.timing_result, minutes.toString(), secondsString))
     }
 }

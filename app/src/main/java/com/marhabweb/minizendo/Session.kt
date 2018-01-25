@@ -79,8 +79,9 @@ open class Session() : RealmObject() {
     // Adds a random message at the end of the session upon notification
     fun addMessage() : String {
         val const = Constants()
-        val total = const.msgGeneric.size
-        val index = rand(0, total)
+     //   val total = const.msgGeneric.size
+     //   val index = rand(0, total)
+        val index = 11
         return const.msgGeneric[index]
     }
 
@@ -91,15 +92,3 @@ open class Session() : RealmObject() {
 
 
 }
-/*
-extension Session: Comparable {
-
-    static func == (lhs: Session, rhs: Session) -> Bool {
-        return lhs.durationInSeconds == rhs.durationInSeconds
-    }
-
-    static func < (lhs: Session, rhs: Session) -> Bool {
-        return lhs.durationInSeconds < rhs.durationInSeconds
-    }
-}
-*/

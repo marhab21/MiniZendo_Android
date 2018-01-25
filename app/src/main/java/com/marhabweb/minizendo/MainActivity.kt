@@ -20,14 +20,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       // setSupportActionBar(toolbar)
+     //   setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener { _ ->
             val addIntent = Intent(this, AddSessionActivity::class.java)
             startActivity(addIntent)
         }
 
-        title = "Mini Zendo"
+        title = getString(R.string.app_name)
 
     }
 
@@ -90,8 +90,8 @@ class MainActivity : AppCompatActivity() {
 
 
     fun showDeleteAlertYesOrNo(session: Session?) {
-        alert("Do you want to remove this session from the list?","Delete Session?") {
-            positiveButton("YES") {
+        alert(getString(R.string.wanna_delete), getString(R.string.delete)) {
+            positiveButton(getString(R.string.yes)) {
                 val realm = Realm.getDefaultInstance()
                 val result = realm.where(Session::class.java).equalTo("id", session?.getId()).findFirst()
                 realm.beginTransaction()
@@ -104,12 +104,12 @@ class MainActivity : AppCompatActivity() {
                 try {
                     realm.where(Session::class.java).equalTo("id", session?.getId()).findFirst()
                 } catch(e: IllegalStateException) {
-                    toast("Session Deleted!")
+                    toast(getString(R.string.session_deleted))
                 }
             }
 
-            negativeButton("NO") {
-                toast("No action taken")
+            negativeButton(getString(R.string.no)) {
+                toast(getString(R.string.no_change))
             }
         }.show()
     }

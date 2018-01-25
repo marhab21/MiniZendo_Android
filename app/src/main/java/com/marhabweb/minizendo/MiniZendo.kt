@@ -10,8 +10,9 @@ import io.realm.Realm
 
 class MiniZendo : Application() {
 
-    public override fun onCreate () {
+    override fun onCreate () {
         super.onCreate()
         Realm.init(this)
     }
+
 }
