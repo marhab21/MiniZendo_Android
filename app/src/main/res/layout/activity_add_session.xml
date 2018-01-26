@@ -4,21 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/zenColor"
+    android:orientation="vertical"
     tools:context="com.marhabweb.minizendo.AddSessionActivity">
 
     <TextView
         android:id="@+id/pageTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/set_sitting_time"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="UnknownId" />
 
-   <!-- <NumberPicker
+    <!-- <NumberPicker
         android:id="@+id/npHours"
         style="@android:style/Widget.NumberPicker"
         android:layout_width="76dp"
@@ -48,24 +52,23 @@
         android:id="@+id/npHours"
         android:layout_width="76dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
         android:layout_marginTop="24dp"
         android:background="@color/zenColor"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hoursText" />
+        app:layout_constraintStart_toStartOf="@+id/pageTitle"
+        app:layout_constraintTop_toBottomOf="@+id/hoursText"
+        tools:ignore="UnknownId" />
 
 
     <TextView
         android:id="@+id/hoursText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="23dp"
         android:text="@string/hours"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/pageTitle"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle"
         tools:text="hours" />
 
@@ -73,12 +76,11 @@
         android:id="@+id/minsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="23dp"
         android:text="@string/minutes"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/pageTitle"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle"
         tools:text="minutes" />
 
@@ -94,10 +96,15 @@
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/npHours" />
+    <!--    app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/npMinutes" />
+        app:layout_constraintTop_toBottomOf="@+id/npMinutes" /> -->
 
     <ImageView
         android:id="@+id/imageView2"
@@ -105,11 +112,18 @@
         android:layout_height="100dp"
         android:layout_centerInParent="true"
         android:layout_marginTop="8dp"
-        android:contentDescription="Zen gate background"
+        android:contentDescription="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveButton"
         app:srcCompat="@drawable/torii_bkg" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
 
 
 </android.support.constraint.ConstraintLayout>

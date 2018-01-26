@@ -1,5 +1,8 @@
 package com.marhabweb.minizendo
-
+/**
+ * Created by martine on 12/19/17.
+ * Setting up the Time Pickers.
+ */
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
@@ -12,6 +15,7 @@ class AddSessionActivity : AppCompatActivity() {
     var hourValue = 0
     var minsValue = 10
 
+    // Get everything we need to start timers.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_session)
@@ -28,17 +32,19 @@ class AddSessionActivity : AppCompatActivity() {
 
         val saveButton = findViewById<Button>(R.id.saveButton)
 
+        // Clicking saves the session into the list.
         saveButton.setOnClickListener {
 
             val session = Session(hourValue, minsValue)
 
             val realm = Realm.getDefaultInstance()
+
+            // Eliminate a new session which would be a duplicate time
             val result = realm.where(Session::class.java).equalTo("durationInSeconds", session.durationInSeconds).findFirst()
             if (result != null) {
                  showSimpleAlert()
                  // Leave without adding anything
             } else {
-
                 realm.beginTransaction()
                 realm.copyToRealm(session)
                 realm.commitTransaction()
@@ -46,10 +52,9 @@ class AddSessionActivity : AppCompatActivity() {
             }
 
         }
-
-
     }
 
+    // Using Anko alerts, to tell user that this is a duplicate, and nothing will be created.
     fun showSimpleAlert() {
         alert(getString(R.string.already_session), getString(R.string.duplicate)) {
             positiveButton(getString(R.string.ok)) {
@@ -58,7 +63,7 @@ class AddSessionActivity : AppCompatActivity() {
         }.show()
     }
 
-
+    // Set up pickers with minimum and maximum times
     private fun setTimePicker(numpick: TimePicker, min: Int, max: Int, wrap: Boolean)  {
 
         //Populate NumberPicker values from minimum and maximum value range
@@ -78,6 +83,5 @@ class AddSessionActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }

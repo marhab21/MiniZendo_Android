@@ -12,11 +12,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import io.realm.RealmResults
 
-
-
 /**
  * Created by martine on 12/24/17.
- * This is for being able to delete items in the list...it doesn't seem to work yet
+ * This is for being able to delete items in the list...
  */
 class CustomAdapter(private var activity: Activity, private var items: RealmResults<Session>) : BaseAdapter() {
 
@@ -35,6 +33,7 @@ class CustomAdapter(private var activity: Activity, private var items: RealmResu
         }
     }
 
+    // Decorating each item with a little zen symbol and a delete button
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view: View?
         val viewHolder: ViewHolder
@@ -54,6 +53,7 @@ class CustomAdapter(private var activity: Activity, private var items: RealmResu
         viewHolder.txtName?.text = session?.getTimeDisplay()
         viewHolder.zenImage?.setImageResource(R.drawable.zen)
 
+        // User can click on the symbol and start the session
         viewHolder.zenImage?.setOnClickListener {
             goToSession(
                     activity,
@@ -61,7 +61,7 @@ class CustomAdapter(private var activity: Activity, private var items: RealmResu
             )
         }
 
-
+        // User can click on the text, and start the session
         viewHolder.txtName?.setOnClickListener {
 
             goToSession(
@@ -70,6 +70,7 @@ class CustomAdapter(private var activity: Activity, private var items: RealmResu
             )
         }
 
+        // User will delete the button
         viewHolder.deleteBtn?.setOnClickListener {
 
             deleteSession(
@@ -81,13 +82,14 @@ class CustomAdapter(private var activity: Activity, private var items: RealmResu
         return view as View
     }
 
+    // Deletion with anko alert
     private fun deleteSession(activity: Activity, session: Session?) {
 
         val act = activity as MainActivity
         act.showDeleteAlertYesOrNo(session)
     }
 
-
+    // Move to session activity
     private fun goToSession(activity: Activity, session: Session) {
 
         val finishIntent = Intent(activity.applicationContext, SessionActivity::class.java)
@@ -96,7 +98,7 @@ class CustomAdapter(private var activity: Activity, private var items: RealmResu
         activity.applicationContext.startActivity(finishIntent)
     }
 
-
+    // Utility functions
     override fun getItem(i: Int): Session? {
         return items[i]
     }

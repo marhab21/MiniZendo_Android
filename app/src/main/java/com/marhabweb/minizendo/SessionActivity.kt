@@ -42,15 +42,12 @@ class SessionActivity : AppCompatActivity() {
         textViewCount = findViewById<TextView>(R.id.textViewCount)
 
         
-            val duration = sessionItem?.durationInSeconds
-            val time = (if (duration != null) duration else throw NullPointerException("Expression 'duration' must not be null")).toLong()
-            val milliTime = time * 1000
-            timeInMillis = milliTime
+        val duration = sessionItem?.durationInSeconds
+        val time = (if (duration != null) duration else throw NullPointerException("Expression 'duration' must not be null")).toLong()
+        val milliTime = time * 1000
+        timeInMillis = milliTime
 
-
-      //  if (sessionItem != null) {
-            start(sessionItem)
-      //  }
+        start(sessionItem)
 
     }
 
