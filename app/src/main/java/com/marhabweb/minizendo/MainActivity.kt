@@ -13,14 +13,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
 
+
+
 class MainActivity : AppCompatActivity() {
 
 
-
+    // This will show the list of created sessions
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-     //   setSupportActionBar(toolbar)
 
         fab.setOnClickListener { _ ->
             val addIntent = Intent(this, AddSessionActivity::class.java)
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // On resume, refresh the list, and enable/disable the + button
     override fun onResume() {
         super.onResume()
 
@@ -48,20 +50,20 @@ class MainActivity : AppCompatActivity() {
           setListMode(listView, textView, false)
 
         } else {
-
+            // Show help text if the list is empty
             setListMode(listView, textView, true)
             val adapter = CustomAdapter(this, results)
             listView.adapter = adapter
 
-
-
-            if (results.count() == 6)
+            // Limit to 6 sessions
+            if (results.count() >= 6)
             {
-
                 fab.setEnabled(false)
+                fab.alpha = 0.1F
 
             } else {
                 fab.setEnabled(true)
+                fab.alpha = 1.0F
             }
         }
 
@@ -88,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(getApplicationContext(), "17. onDetachedFromWindow()", Toast.LENGTH_SHORT).show()
     }
 
-
+    // Ask the user whether they really want to remove this session from the list
     fun showDeleteAlertYesOrNo(session: Session?) {
         alert(getString(R.string.wanna_delete), getString(R.string.delete)) {
             positiveButton(getString(R.string.yes)) {
@@ -114,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         }.show()
     }
 
-    // Reload the Activity, to refresh the list...
+    // Reload the Activity, to refresh the list...will call onResume
     private fun Resume() {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT

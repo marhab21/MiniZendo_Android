@@ -46,7 +46,7 @@ open class Session() : RealmObject() {
         return fromHours + fromMins
     }
 
-
+     // Time display inside the counter. It will always be in minutes.
     fun getTimeDisplay() : String {
 
         var hrText = "hour"

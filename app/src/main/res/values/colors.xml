@@ -3,8 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="circleColor">#A9A9A9</color>
+    <color name="circleColor">#969090</color>
     <color name="zenColor">#C8C7B3</color>
+    <color name="colorDarkGrey">#666768</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="black_overlay">#66000000</color>
 </resources>

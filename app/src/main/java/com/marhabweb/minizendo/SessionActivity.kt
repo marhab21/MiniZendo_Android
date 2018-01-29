@@ -51,13 +51,13 @@ class SessionActivity : AppCompatActivity() {
 
     }
 
+    // Start with a bell
     private fun start(session: Session) {
-
 
         progressBar.max = timeInMillis.toInt() / 1000
         isRunning = true
 
-        mPlayer = MediaPlayer.create(applicationContext, R.raw.bell)
+        mPlayer = MediaPlayer.create(applicationContext, R.raw.realbell)
         mPlayer.start()
 
         countDownTimer = object : CountDownTimer(timeInMillis, 1) {
@@ -69,6 +69,7 @@ class SessionActivity : AppCompatActivity() {
 
             }
 
+            // End with the same bell
             override fun onFinish() {
                 textViewCount.text = getString(R.string.zero_time)
                 isRunning = false
@@ -85,6 +86,7 @@ class SessionActivity : AppCompatActivity() {
         countDownTimer.start()
     }
 
+    // Stop the original timer, and start another one to show the quote (10 seconds)
     private fun stop()
     {
         isRunning = false
