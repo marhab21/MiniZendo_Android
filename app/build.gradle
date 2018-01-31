@@ -10,7 +10,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.marhabweb.minizendo"
+        applicationId "com.marhabweb.mini_zendo"
         minSdkVersion 22
         targetSdkVersion 26
         versionCode 1

@@ -1,4 +1,4 @@
-package com.marhabweb.minizendo
+package com.marhabweb.mini_zendo
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

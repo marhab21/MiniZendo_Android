@@ -1,10 +1,11 @@
-package com.marhabweb.minizendo
+package com.marhabweb.mini_zendo
 
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.TextView
 import io.realm.Realm
@@ -28,6 +29,9 @@ class SessionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_session)
 
         title = getString(R.string.session)
+
+        // Keep the app open, to make sure the app doesn't go to sleep
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         val zenGate = findViewById<View>(R.id.zenImage)
         val image = zenGate.background
@@ -92,7 +96,7 @@ class SessionActivity : AppCompatActivity() {
         isRunning = false
         countDownTimer.cancel()
 
-        shortTimer = object : CountDownTimer(10000, 1) {
+        shortTimer = object : CountDownTimer(30000, 1) {
 
             override fun onTick(millisUntilFinished: Long) {
                      // do nothing

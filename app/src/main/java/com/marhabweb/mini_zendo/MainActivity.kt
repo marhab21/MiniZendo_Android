@@ -1,4 +1,4 @@
-package com.marhabweb.minizendo
+package com.marhabweb.mini_zendo
 
 import android.content.Intent
 import android.os.Bundle

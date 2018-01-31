@@ -1,4 +1,4 @@
-package com.marhabweb.minizendo
+package com.marhabweb.mini_zendo
 /**
  * Created by martine on 12/19/17.
  * Setting up the Time Pickers.
@@ -75,7 +75,7 @@ class AddSessionActivity : AppCompatActivity() {
         //Gets whether the selector wheel wraps when reaching the min/max value.
         numpick.setWrapSelectorWheel(wrap)
 
-        numpick.setOnValueChangedListener  { _, _, newVal ->
+        numpick.setOnValueChangedListener  { _, _, _ ->
             if (max > 23) { // We are dealing with minutes
                 minsValue = numpick.value
             } else {

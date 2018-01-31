@@ -1,4 +1,4 @@
-package com.marhabweb.minizendo
+package com.marhabweb.mini_zendo
 
 import android.app.Application
 import io.realm.Realm

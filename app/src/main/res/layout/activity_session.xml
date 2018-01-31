@@ -7,7 +7,7 @@
     android:background="@drawable/torii_bkg"
     android:backgroundTint="#80FFFFFF"
     android:backgroundTintMode="src_over"
-    tools:context="com.marhabweb.minizendo.SessionActivity">
+    tools:context="com.marhabweb.mini_zendo.SessionActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"

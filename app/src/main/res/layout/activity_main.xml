@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/zenColor"
-    tools:context="com.marhabweb.minizendo.MainActivity">
+    tools:context="com.marhabweb.mini_zendo.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
