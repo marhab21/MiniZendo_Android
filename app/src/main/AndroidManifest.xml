@@ -21,9 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.marhabweb.mini_zendo.MainActivity" />
-        <activity android:name="com.marhabweb.mini_zendo.AddSessionActivity" />
-        <activity android:name="com.marhabweb.mini_zendo.SessionActivity" />
+        <activity android:name="com.marhabweb.mini_zendo.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.marhabweb.mini_zendo.AddSessionActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.marhabweb.mini_zendo.SessionActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
 
 
     </application>

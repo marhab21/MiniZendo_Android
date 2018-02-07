@@ -33,9 +33,10 @@ class SessionActivity : AppCompatActivity() {
         // Keep the app open, to make sure the app doesn't go to sleep
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        val zenGate = findViewById<View>(R.id.zenImage)
-        val image = zenGate.background
-        image.alpha = 120
+        val narrows = findViewById<View>(R.id.narrowsImage)
+        val image = narrows.background
+        image.alpha = 255
+
 
         val sessionItemId = intent.getStringExtra("sessionItem")
         val realm = Realm.getDefaultInstance()
