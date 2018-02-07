@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/narrows"
-    android:backgroundTint="#80FFFFFF"
+    android:backgroundTint="#55FFFFFF"
     android:backgroundTintMode="src_over"
     tools:context="com.marhabweb.mini_zendo.SessionActivity">
 
@@ -30,7 +30,7 @@
         android:layout_marginBottom="87dp"
         android:layout_marginStart="79dp"
         android:text="@string/zero_time"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -40,9 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="cursive"
         android:maxLines="8"
+        android:textColor="@color/colorBlack"
         android:textSize="42sp"
         android:textStyle="bold" />
 

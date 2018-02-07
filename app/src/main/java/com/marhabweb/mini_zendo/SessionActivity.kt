@@ -130,7 +130,6 @@ class SessionActivity : AppCompatActivity() {
             secondsString = "0" + secondsString
         }
 
-        //textViewCount.setText(minutes.toString() + ":" + secondsString)
         textViewCount.setText(getString(R.string.timing_result, minutes.toString(), secondsString))
     }
 }
