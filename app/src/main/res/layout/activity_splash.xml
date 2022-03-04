@@ -1,25 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#000000"
+    android:orientation="vertical">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorBlack"
-        android:src="@drawable/torii_bkg"
-        android:scaleType="fitCenter"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
         android:padding="40dp"
+        android:textColor="@color/white"
         android:text="@string/mini_zendo"
-        android:textStyle="bold"
-        android:textSize="32sp"/>
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="381dp"
+        android:layout_height="388dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/mini_zendo"
+        android:scaleType="fitStart"
+        app:srcCompat="@drawable/torii_bkg" />
+
+    <TextView
+        android:id="@+id/quoteText"
+        android:layout_width="match_parent"
+        android:layout_height="139dp"
+        android:gravity="center"
+        android:padding="40dp"
+        android:text="@string/quotes_credit"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
 
 
-</FrameLayout>
+</LinearLayout>
+

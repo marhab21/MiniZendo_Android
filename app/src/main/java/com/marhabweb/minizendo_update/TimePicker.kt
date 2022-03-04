@@ -1,4 +1,4 @@
-package com.marhabweb.mini_zendo
+package com.marhabweb.minizendo_update
 
 import android.content.Context
 import android.graphics.Color
