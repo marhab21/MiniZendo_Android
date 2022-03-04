@@ -1,0 +1,18 @@
+proguard-rules.pro
+../gradlew
+../gradlew.bat
+
+/build
+/release
+
+../.gradle
+../gradle
+
+
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+../.DS_Store
+/.DS_Store

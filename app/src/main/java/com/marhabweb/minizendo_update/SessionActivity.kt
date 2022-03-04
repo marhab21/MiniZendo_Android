@@ -1,28 +1,26 @@
-package com.marhabweb.mini_zendo
+package com.marhabweb.minizendo_update
 
+import androidx.appcompat.app.AppCompatActivity
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.TextView
-import io.realm.Realm
+import kotlin.math.roundToInt
 
 class SessionActivity : AppCompatActivity() {
 
-    lateinit private var progressBar: ProgressBar
-    lateinit private var textViewCount: TextView
-    lateinit private var countDownTimer: CountDownTimer
-    lateinit private var shortTimer: CountDownTimer
-    lateinit private var mPlayer: MediaPlayer
-
+    private lateinit var progressBar: ProgressBar
+    private lateinit var textViewCount: TextView
+    private lateinit var countDownTimer: CountDownTimer
+    private lateinit var shortTimer: CountDownTimer
+    private lateinit var mPlayer: MediaPlayer
 
     internal var isRunning = false
     internal var timeInMillis: Long = 0
 
-    internal var currentSession = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,24 +29,24 @@ class SessionActivity : AppCompatActivity() {
         title = getString(R.string.session)
 
         // Keep the app open, to make sure the app doesn't go to sleep
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         val narrows = findViewById<View>(R.id.narrowsImage)
         val image = narrows.background
         image.alpha = 255
 
+        val sessionToPlay = intent.getStringExtra("sessionItem")
 
-        val sessionItemId = intent.getStringExtra("sessionItem")
-        val realm = Realm.getDefaultInstance()
-        val sessionItem = realm.where(Session::class.java).equalTo("id", sessionItemId).findFirst()
+        val sessionItemId = sessionToPlay.toString()
+        // Retrieve the session we want
+        val duration: Int = MZPrefs.getDurationForId(sessionItemId)!!
+        // Create it
+        val sessionItem = Session(sessionItemId, duration)
+        // Grab progress bar (circle) and number
+        progressBar = findViewById(R.id.progressBar)
+        textViewCount = findViewById(R.id.textViewCount)
 
-
-        progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        textViewCount = findViewById<TextView>(R.id.textViewCount)
-
-        
-        val duration = sessionItem?.durationInSeconds
-        val time = (if (duration != null) duration else throw NullPointerException("Expression 'duration' must not be null")).toLong()
+        val time = duration.toLong()
         val milliTime = time * 1000
         timeInMillis = milliTime
 
@@ -61,17 +59,16 @@ class SessionActivity : AppCompatActivity() {
 
         progressBar.max = timeInMillis.toInt() / 1000
         isRunning = true
-
+        // Play the bell at start of session
         mPlayer = MediaPlayer.create(applicationContext, R.raw.realbell)
         mPlayer.start()
 
         countDownTimer = object : CountDownTimer(timeInMillis, 1) {
-
+            // Countdown text is 1 second off from the progress bar
             override fun onTick(millisUntilFinished: Long) {
-                updateTimer(millisUntilFinished / 1000)
-                progressBar.progress = Math.round(millisUntilFinished * 0.001f)
+                progressBar.progress = (millisUntilFinished * 0.001f).roundToInt()
                 progressBar.rotation = 360f
-
+                updateTimer(millisUntilFinished / 1000)
             }
 
             // End with the same bell
@@ -80,11 +77,13 @@ class SessionActivity : AppCompatActivity() {
                 isRunning = false
                 progressBar.progress = timeInMillis.toInt() / 1000
                 progressBar.max = timeInMillis.toInt() / 1000
-                val quote = findViewById<TextView>(R.id.suzukiQuote)
+                val quote = findViewById<TextView>(R.id.buddhistQuote)
                 quote.text = session.addMessage()
                 mPlayer = MediaPlayer.create(applicationContext, R.raw.realbell)
                 mPlayer.start()
                 stop()
+                progressBar.visibility = View.INVISIBLE
+                textViewCount.visibility = View.INVISIBLE
 
             }
         }.start()
@@ -100,7 +99,7 @@ class SessionActivity : AppCompatActivity() {
         shortTimer = object : CountDownTimer(30000, 1) {
 
             override fun onTick(millisUntilFinished: Long) {
-                     // do nothing
+                // do nothing
             }
 
             override fun onFinish() {
@@ -119,7 +118,7 @@ class SessionActivity : AppCompatActivity() {
         finish()
     }
 
-
+    // Seconds and progress are out of phase by 1 second
     fun updateTimer(secondsLeft: Long) {
         val minutes = secondsLeft.toInt() / 60
         val seconds = secondsLeft - minutes * 60 // Seconds left over after division
@@ -127,9 +126,9 @@ class SessionActivity : AppCompatActivity() {
         var secondsString = seconds.toString()
 
         if (seconds <= 9) {
-            secondsString = "0" + secondsString
+            secondsString = "0$secondsString"
         }
 
-        textViewCount.setText(getString(R.string.timing_result, minutes.toString(), secondsString))
+        textViewCount.text = getString(R.string.timing_result, minutes.toString(), secondsString)
     }
 }

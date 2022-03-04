@@ -7,7 +7,7 @@
     android:background="@drawable/narrows"
     android:backgroundTint="#55FFFFFF"
     android:backgroundTintMode="src_over"
-    tools:context="com.marhabweb.mini_zendo.SessionActivity">
+    tools:context="com.marhabweb.minizendo_update.SessionActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -35,7 +35,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/suzukiQuote"
+        android:id="@+id/buddhistQuote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
