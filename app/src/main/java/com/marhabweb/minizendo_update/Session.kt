@@ -15,8 +15,9 @@ open class Session {
     // The session id, will be the length of time as a string.
     // It will always be unique. This constructor is called when the session
     // is started
-    constructor( id: String, time: Int)  {
-        this.id = time.toString()
+    constructor( id: String,  time: Int)  {
+        //this.id = time.toString()
+        this.id = id
         this.durationInSeconds = time
         this.displayDuration = durationInSeconds / 60
         this.title = getTimeDisplay()
