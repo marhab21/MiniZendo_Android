@@ -41,11 +41,11 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:fontFamily="cursive"
-        android:maxLines="8"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="10"
         android:textColor="@color/colorBlack"
         android:textSize="42sp"
-        android:textStyle="bold" />
+        android:textStyle="normal" />
 
 
 </RelativeLayout>
