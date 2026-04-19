@@ -1,24 +1,37 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
 }
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('local.properties')
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }
+}
+
+def mzStoreFile = { ->
+    def p = keystoreProperties.getProperty('mz.storeFile')
+    if (p != null && !p.isBlank()) return file(p)
+    def env = System.getenv('MZ_STORE_FILE')
+    if (env != null && !env.isBlank()) return file(env)
+    null
+}
+
+def mzStorePassword = System.getenv('MZ_STORE_PASSWORD') ?: keystoreProperties.getProperty('mz.storePassword')
+def mzKeyAlias = System.getenv('MZ_KEY_ALIAS') ?: keystoreProperties.getProperty('mz.keyAlias')
+def mzKeyPassword = System.getenv('MZ_KEY_PASSWORD') ?: keystoreProperties.getProperty('mz.keyPassword')
 
 android {
     signingConfigs {
-        debug {
-            storeFile file('/Users/martine/Desktop/MiniZendo/GitAndroidMZ/CertKeys/mzupdate.keystore')
-            storePassword 'minizendo4ever'
-            keyAlias 'mzupdatekey'
-            keyPassword 'minizendo4ever'
-        }
         release {
-            storeFile file('/Users/martine/Desktop/MiniZendo/GitAndroidMZ/CertKeys/mzupdate.keystore')
-            storePassword 'minizendo4ever'
-            keyAlias 'mzupdatekey'
-            keyPassword 'minizendo4ever'
+            def store = mzStoreFile()
+            if (store != null && store.isFile() && mzStorePassword && mzKeyAlias && mzKeyPassword) {
+                storeFile store
+                storePassword mzStorePassword
+                keyAlias mzKeyAlias
+                keyPassword mzKeyPassword
+            }
         }
-
     }
     compileSdk 34
 
@@ -26,8 +39,8 @@ android {
         applicationId "com.marhabweb.minizendo_update"
         minSdk 31
         targetSdk 34
-        versionCode 3
-        versionName '3.1'
+        versionCode 8
+        versionName '8.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,7 +49,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            if (signingConfigs.release.storeFile != null) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     compileOptions {
@@ -62,6 +77,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.2'
     implementation 'androidx.preference:preference-ktx:1.2.1'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     //noinspection NotInterpolated

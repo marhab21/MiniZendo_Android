@@ -9,7 +9,7 @@ class Constants {
         "The present moment is filled with joy and happiness. If you are attentive, you will see it \n\nThich Nhat Hahn",
         "We do not exist for the sake of something else. We exist for the sake of ourselves \n\nSuzuki Roshi",
         "The seed of suffering may be strong, but don't wait until you have no more suffering to allow yourself to be happy \n\nThich Nhat Hahn",
-        "When something dies is the greatest teaching - Suzuki Roshi",
+        "When something dies is the greatest teaching \n\nSuzuki Roshi",
         "Feelings come and go like clouds in a windy sky. Conscious breathing is my anchor \n\nThich Nhat Hahn",
         "In the zazen posture, your mind and body have great power to accept things as they are, whether agreeable or disagreeable \n\nSuzuki Roshi",
         "Walk as if you are kissing the Earth with your feet \n\nThich Nhat Hahn",
