@@ -1,73 +1,101 @@
 package com.marhabweb.minizendo_update
 
-
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.marhabweb.minizendo_update.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Set up the persistence of sessions
         MZPrefs.setup(applicationContext)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
-       // val navController = findNavController(R.id.nav_host_fragment_content_main)
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener {
             navController.navigate(R.id.action_FirstFragment_to_SecondFragment)
-            binding.fab.visibility = View.INVISIBLE
+        }
+        binding.headerBack.setOnClickListener {
+            navController.navigateUp()
         }
 
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (navController.currentDestination?.id == R.id.SecondFragment) {
+                        if (!navController.popBackStack(R.id.FirstFragment, false)) {
+                            if (!navController.navigateUp()) {
+                                finish()
+                            }
+                        }
+                    } else if (!navController.navigateUp()) {
+                        finish()
+                    }
+                }
+            }
+        )
+
+        navController.addOnDestinationChangedListener { _, dest, _ ->
+            when (dest.id) {
+                R.id.FirstFragment -> {
+                    binding.headerBack.visibility = View.GONE
+                }
+                R.id.SecondFragment -> {
+                    setTopBarVisible(false)
+                }
+            }
+        }
     }
 
-    // Toggle the plus button in and out of fragments
     fun plusButtonVisible(visible: Boolean) {
-        val fabBtn = binding.fab
-        if (visible) {
-            fabBtn.visibility = View.VISIBLE
-        } else {
-            fabBtn.visibility = View.INVISIBLE
+        with(binding) {
+            if (visible) {
+                fab.show()
+            } else {
+                fab.hide()
+            }
         }
     }
 
-    // Disable if limit is reached.
     fun plusButtonEnabled(enabled: Boolean) {
-        val fabBtn = binding.fab
-        fabBtn.alpha = 1.0F
-        fabBtn.isEnabled = enabled
+        binding.fab.isEnabled = enabled
     }
 
-   // Refresh list after deleting a session
-   fun refreshList() {
+    /**
+     * Top bar for the first screen: "Mini Zendo" when empty, "Session List" when the user has sessions.
+     */
+    fun applySessionListHeader(hasSessions: Boolean) {
+        with(binding) {
+            setTopBarVisible(hasSessions)
+            headerBack.visibility = View.GONE
+            headerTitle.setText(if (hasSessions) R.string.session_list else R.string.mini_zendo)
+            headerTitle.gravity = Gravity.CENTER_VERTICAL or Gravity.START
+            headerTitle.textAlignment = TextView.TEXT_ALIGNMENT_VIEW_START
+            headerTitle.visibility = View.VISIBLE
+        }
+    }
+
+    fun setTopBarVisible(visible: Boolean) {
+        binding.topBar.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    fun refreshList() {
+        @Suppress("DEPRECATION")
         overridePendingTransition(0, 0)
         startActivity(intent)
+        @Suppress("DEPRECATION")
         overridePendingTransition(0, 0)
     }
-
-    // Navigate
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
 }
-

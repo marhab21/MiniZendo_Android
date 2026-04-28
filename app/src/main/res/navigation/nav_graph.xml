@@ -23,6 +23,9 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/FirstFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/FirstFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

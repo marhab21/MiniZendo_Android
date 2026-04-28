@@ -8,21 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val timeToLoad: Long = 3000 //3 seconds
-
+    private val timeToLoad: Long = 3000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-
-         Handler(Looper.getMainLooper()).postDelayed({
-             val intent = Intent(applicationContext, MainActivity::class.java)
-             startActivity(intent)
-             finish()
-         }, timeToLoad)
-
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, timeToLoad)
     }
-
 }
-
