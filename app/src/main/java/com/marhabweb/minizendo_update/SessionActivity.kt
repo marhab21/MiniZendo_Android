@@ -24,6 +24,7 @@ class SessionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_session)
+        supportActionBar?.hide()
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
@@ -39,7 +40,7 @@ class SessionActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progressBar)
         textViewCount = findViewById(R.id.textViewCount)
-        findViewById<TextView>(R.id.sessionTitle).text = sessionItem.title
+        findViewById<TextView>(R.id.sessionTitle).text = getString(R.string.session)
 
         val time = duration.toLong()
         val milliTime = time * 1000
@@ -52,8 +53,7 @@ class SessionActivity : AppCompatActivity() {
 
         progressBar.max = timeInMillis.toInt() / 1000
         isRunning = true
-        mPlayer = MediaPlayer.create(applicationContext, R.raw.realbell)
-        mPlayer.start()
+        playBell()
 
         countDownTimer = object : CountDownTimer(timeInMillis, 1) {
             override fun onTick(millisUntilFinished: Long) {
@@ -71,12 +71,25 @@ class SessionActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.sessionTitle).visibility = View.INVISIBLE
                 quote.text = session.addMessage()
                 quote.visibility = View.VISIBLE
-                mPlayer = MediaPlayer.create(applicationContext, R.raw.realbell)
-                mPlayer.start()
+                playBell()
                 onSessionComplete()
             }
         }
         countDownTimer.start()
+    }
+
+    private fun playBell() {
+        if (::mPlayer.isInitialized) {
+            mPlayer.release()
+        }
+        mPlayer = MediaPlayer.create(applicationContext, R.raw.realbell)
+        mPlayer.setAudioAttributes(
+            android.media.AudioAttributes.Builder()
+                .setUsage(android.media.AudioAttributes.USAGE_ALARM)
+                .setContentType(android.media.AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build()
+        )
+        mPlayer.start()
     }
 
     private fun onSessionComplete() {

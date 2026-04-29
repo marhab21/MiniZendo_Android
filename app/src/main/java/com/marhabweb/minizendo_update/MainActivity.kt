@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     } else if (!navController.navigateUp()) {
-                        finish()
+                        moveTaskToBack(true)
                     }
                 }
             }
@@ -60,13 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun plusButtonVisible(visible: Boolean) {
-        with(binding) {
-            if (visible) {
-                fab.show()
-            } else {
-                fab.hide()
-            }
-        }
+        binding.fab.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     fun plusButtonEnabled(enabled: Boolean) {

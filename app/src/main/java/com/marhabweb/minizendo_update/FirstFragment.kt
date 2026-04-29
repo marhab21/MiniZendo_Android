@@ -1,9 +1,12 @@
 package com.marhabweb.minizendo_update
 
+import android.graphics.Canvas
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -37,8 +40,6 @@ class FirstFragment : Fragment() {
         }
         if (listAdapter == null) {
             listAdapter = SessionListAdapter(act)
-            binding.sessionRecycler.layoutManager = LinearLayoutManager(context)
-            binding.sessionRecycler.adapter = listAdapter
             itemTouch = ItemTouchHelper(
                 object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                     override fun onMove(
@@ -47,29 +48,80 @@ class FirstFragment : Fragment() {
                         target: RecyclerView.ViewHolder
                     ) = false
 
+                    override fun onChildDraw(
+                        c: Canvas,
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder,
+                        dX: Float,
+                        dY: Float,
+                        actionState: Int,
+                        isCurrentlyActive: Boolean
+                    ) {
+                        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX < 0f) {
+                            val itemView = viewHolder.itemView
+                            val ctx = recyclerView.context
+                            val bg = ColorDrawable(
+                                ContextCompat.getColor(ctx, R.color.swipe_delete_background)
+                            )
+                            bg.setBounds(
+                                itemView.right + dX.toInt(),
+                                itemView.top,
+                                itemView.right,
+                                itemView.bottom
+                            )
+                            bg.draw(c)
+                            val icon = ContextCompat.getDrawable(ctx, R.drawable.ic_delete_swipe_24)
+                            icon?.let {
+                                val margin =
+                                    (itemView.height - it.intrinsicHeight).coerceAtLeast(0) / 2
+                                val top = itemView.top + margin
+                                val bottom = top + it.intrinsicHeight
+                                val right = itemView.right - margin
+                                val left = right - it.intrinsicWidth
+                                it.setBounds(left, top, right, bottom)
+                                it.draw(c)
+                            }
+                        }
+                        super.onChildDraw(
+                            c,
+                            recyclerView,
+                            viewHolder,
+                            dX,
+                            dY,
+                            actionState,
+                            isCurrentlyActive
+                        )
+                    }
+
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                         val p = viewHolder.bindingAdapterPosition
                         if (p == RecyclerView.NO_POSITION) return
-                        listAdapter?.notifyItemChanged(p)
-                        val s = listAdapter?.sessionAt(p) ?: return
-                        val alertCall = AlertBuilder(act)
-                        alertCall.showDeleteAlert(
+                        val s = listAdapter?.sessionAt(p) ?: run {
+                            listAdapter?.notifyItemChanged(p)
+                            return
+                        }
+                        AlertBuilder(act).showDeleteAlert(
                             getString(R.string.delete),
                             getString(R.string.wanna_delete),
-                            s.id
-                        ) { act.refreshList() }
+                            s.id,
+                            onDeleted = { act.refreshList() },
+                            onCancel = { listAdapter?.notifyItemChanged(p) }
+                        )
                     }
                 }
             )
-            itemTouch?.attachToRecyclerView(binding.sessionRecycler)
         }
+        binding.sessionRecycler.layoutManager = LinearLayoutManager(context)
+        binding.sessionRecycler.adapter = listAdapter
+        itemTouch?.attachToRecyclerView(binding.sessionRecycler)
     }
 
     override fun onResume() {
         super.onResume()
         val act = requireActivity() as MainActivity
-        val results = MZPrefs.getAllPrefs()
-        val numSessions = results?.size ?: 0
+        val pairs = MZPrefs.getPrefsArray()
+        listAdapter?.setItems(pairs)
+        val numSessions = pairs.size
 
         if (numSessions == 0) {
             binding.welcomeScroll.visibility = View.VISIBLE
@@ -82,13 +134,13 @@ class FirstFragment : Fragment() {
             binding.helpFab.visibility = View.GONE
             binding.sessionRecycler.visibility = View.VISIBLE
             act.applySessionListHeader(true)
-            listAdapter?.setItems(MZPrefs.getPrefsArray())
             act.plusButtonVisible(true)
             act.plusButtonEnabled(numSessions < mMaxSessions)
         }
     }
 
     override fun onDestroyView() {
+        itemTouch?.attachToRecyclerView(null)
         super.onDestroyView()
         _binding = null
     }

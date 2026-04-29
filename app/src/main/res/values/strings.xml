@@ -32,7 +32,7 @@
     <string name="already_session">You already have a session in the list with this duration</string>
     <string name="duplicate">Duplicate Session</string>
     <string name="no_change">No change&#x2026;</string>
-    <string name="session">Zazen Time&#x2026;</string>
+    <string name="session">Zazen time...</string>
     <string name="timing_result">%1$s:%2$s</string>
     <string name="press_to_add">Press + button below to add session (6 maximum)</string>
     <string name="plus_description">This is the plus sign to add session</string>
