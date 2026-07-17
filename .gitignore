@@ -1,1 +1,24 @@
+# Local Android SDK and signing configuration
 local.properties
+*.jks
+*.keystore
+
+# Gradle and build output
+.gradle/
+**/build/
+**/release/
+.kotlin/
+.externalNativeBuild/
+.cxx/
+
+# Android Studio
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Generated release packages
+*.apk
+*.aab

@@ -1,0 +1,23 @@
+GOOGLE PLAY GRAPHICS - WHICH FILE GOES WHERE
+============================================
+
+Each slot needs a DIFFERENT size. Do not resize everything to 1024x500.
+
+1. APP ICON
+   File: play-store-icon-512.png
+   Size: 512 x 512 px
+   Slot: Main store listing > App icon
+
+2. FEATURE GRAPHIC (wide banner - NOT screenshots)
+   File: feature-graphic-1024x500.png
+   Size: 1024 x 500 px (landscape)
+   Slot: Main store listing > Feature graphic
+
+3. PHONE SCREENSHOTS (tall - NOT 1024x500)
+   Files: screenshots/*.png (or .jpg if large)
+   Size: 1080 x 1920 px each (portrait)
+   Slot: Main store listing > Phone screenshots
+   Max 8 MB per file; use JPEG versions if provided
+
+Mistake that causes "too small": uploading 1024x500 images as phone
+screenshots. Google wants 1080x1920 for portrait phone screenshots.

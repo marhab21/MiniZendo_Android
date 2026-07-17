@@ -74,14 +74,14 @@
                 android:orientation="horizontal"
                 android:padding="8dp">
 
-                <com.marhabweb.minizendo_update.TimePicker
+                <com.nagtime.mz_renew.TimePicker
                     android:id="@+id/npHours"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent" />
 
-                <com.marhabweb.minizendo_update.TimePicker
+                <com.nagtime.mz_renew.TimePicker
                     android:id="@+id/npMinutes"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

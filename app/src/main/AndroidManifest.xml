@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiniZendo">
         <activity
-            android:name="com.marhabweb.minizendo_update.SplashActivity"
+            android:name="com.nagtime.mz_renew.SplashActivity"
             android:label="@string/app_name"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -21,11 +21,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.marhabweb.minizendo_update.MainActivity"
+            android:name="com.nagtime.mz_renew.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MiniZendo.NoActionBar" />
-        <activity android:name="com.marhabweb.minizendo_update.SessionActivity"
+        <activity android:name="com.nagtime.mz_renew.SessionActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
